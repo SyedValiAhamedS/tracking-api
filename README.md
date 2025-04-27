@@ -25,6 +25,18 @@ TP - Fixed Constant
 ID - Destination country code
 Remaining varying unique data.
 
+### Deployed URL
+https://tracking-api-syedahamed17-dev.apps.rm2.thpm.p1.openshiftapps.com/next-tracking-number?origin_country_id=MY&destination_country_id=ID&weight=2.5&created_at=2018-11-20T19:29:32%2B08:00&customer_id=123&customer_name=JohnDoe&customer_slug=john-doe
+
+### Future Improvisation
+* Swagger Docs/UI can be to view the details easily.
+* Spring Boot actuator can be added for monitoring.
+* Junit test cases can bbe added for robust unit testing.
+* Spring cloud can be incorporated.
+* URL can be encoded and validated.
+* Spring security can be incorporated.
+* Logging improvisation.
+
 ### Guides
 The following guides illustrate how to use some features concretely:
 

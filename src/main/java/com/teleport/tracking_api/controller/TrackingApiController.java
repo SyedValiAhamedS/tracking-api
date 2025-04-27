@@ -2,6 +2,8 @@ package com.teleport.tracking_api.controller;
 
 import java.time.OffsetDateTime;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +18,8 @@ import jakarta.validation.constraints.Pattern;
 
 @RestController
 public class TrackingApiController {
+	
+	Logger logger = LoggerFactory.getLogger(TrackingApiController.class);
 
 	private final TrackingApiService trackingApiService;
 
@@ -33,6 +37,7 @@ public class TrackingApiController {
 			@NotBlank(message = "Customer Name cannot be blank") @RequestParam(name = "customer_name") String customerName,
 			@NotBlank(message = "Customer slug cannot be blank") @RequestParam(name = "customer_slug") String customerSlug)
 			throws Exception {
+		logger.info("Generating tracking number for customerId {} ", customerId);
 		OffsetDateTime createdTimeStamp = TrackingApiUtil.retrieveOffsetDateTimeInRFC3339Format(createdAt);
 
 		return trackingApiService.generateTrackingNumber(originCountryId, destinationCountryId, weight,

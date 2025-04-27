@@ -1,7 +1,10 @@
 package com.teleport.tracking_api.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -10,6 +13,8 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 @Component
 public class TrackingNumberGenerator {
+	
+	Logger logger = LoggerFactory.getLogger(TrackingNumberGenerator.class);
     
 	// In a horizontally scaled setup, this workerId should be unique per instance.
 	@Value("${tracking.worker-id:0}")
@@ -34,6 +39,7 @@ public class TrackingNumberGenerator {
             throw new IllegalArgumentException(String.format(
                     "Worker Id can't be greater than %d or less than 0", MAX_WORKER_ID));
         }
+    	logger.info("Worked ID currently used for generation is {} ", workerId);
         lock.lock();
         try {
             long currentTimestamp = System.currentTimeMillis();

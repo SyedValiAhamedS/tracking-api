@@ -1,5 +1,7 @@
 package com.teleport.tracking_api.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.teleport.tracking_api.dto.TrackingNumberResponse;
@@ -12,6 +14,8 @@ import java.time.format.DateTimeFormatter;
 public class TrackingApiService {
 
 	private final TrackingNumberGenerator trackingNumGen;
+	
+	Logger logger = LoggerFactory.getLogger(TrackingApiService.class);
 
 	public TrackingApiService(TrackingNumberGenerator trackingNumGen) {
 		this.trackingNumGen = trackingNumGen;
@@ -38,6 +42,8 @@ public class TrackingApiService {
 			nextTrackNum = nextTrackNum.substring(nextTrackNum.length() - allowedIdPartLength);
 			trackingNumber = prefix + nextTrackNum;
 		}
+		
+		logger.info("Generated tracking number for customerId {} is {} ", customerId, trackingNumber);
 
 		// Capture the creation timestamp in RFC 3339 format.
 		String generatedAt = OffsetDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
